@@ -4,9 +4,717 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EFES Restaurant Menu</title>
+
+  <style>
+    :root {
+      --bg: #f3ead6;
+      --paper: #fbf4df;
+      --navy: #10243f;
+      --gold: #b48a42;
+      --brown: #5b3b1e;
+      --muted: #7a6a58;
+      --line: rgba(16, 36, 63, 0.18);
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.6), transparent 35%),
+        linear-gradient(180deg, #f7efd9, #eadbbd);
+      color: var(--navy);
+    }
+
+    .app {
+      max-width: 520px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: var(--paper);
+      border-left: 1px solid rgba(0,0,0,0.08);
+      border-right: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 0 35px rgba(0,0,0,0.14);
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251, 244, 223, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 18px 12px;
+      text-align: center;
+    }
+
+    .brand {
+      letter-spacing: 10px;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      margin-top: 4px;
+      letter-spacing: 5px;
+      font-size: 13px;
+      color: var(--brown);
+    }
+
+    .main-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 14px 14px 8px;
+      overflow-x: auto;
+      background: var(--paper);
+    }
+
+    .main-tabs button,
+    .category-tabs button {
+      border: 1px solid rgba(16, 36, 63, 0.22);
+      background: #fff7df;
+      color: var(--navy);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-family: inherit;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .main-tabs button.active,
+    .category-tabs button.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+
+    .category-tabs {
+      display: flex;
+      gap: 8px;
+      padding: 0 14px 14px;
+      overflow-x: auto;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero {
+      margin: 16px;
+      padding: 26px 18px;
+      border: 1px solid rgba(180, 138, 66, 0.45);
+      border-radius: 18px;
+      background:
+        linear-gradient(rgba(16,36,63,0.12), rgba(16,36,63,0.05)),
+        radial-gradient(circle at top left, rgba(180,138,66,0.22), transparent 40%),
+        #f7ecd0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: 3px;
+    }
+
+    .hero p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .search-box {
+      padding: 0 16px 14px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 13px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: #fffaf0;
+      font-family: inherit;
+      font-size: 15px;
+      outline: none;
+    }
+
+    .section-title {
+      margin: 8px 16px 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 22px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .menu-list {
+      padding: 0 14px 24px;
+    }
+
+    .item {
+      display: grid;
+      grid-template-columns: 82px 1fr;
+      gap: 12px;
+      padding: 12px;
+      margin-bottom: 12px;
+      background: rgba(255, 250, 240, 0.76);
+      border: 1px solid rgba(16, 36, 63, 0.12);
+      border-radius: 16px;
+      cursor: pointer;
+    }
+
+    .item-img {
+      width: 82px;
+      height: 82px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 30%, #d6a85f, transparent 35%),
+        linear-gradient(135deg, #6b321d, #d9a755);
+      border: 1px solid rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .item-main {
+      min-width: 0;
+    }
+
+    .item-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: baseline;
+    }
+
+    .item-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    .item-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--brown);
+      white-space: nowrap;
+    }
+
+    .item-desc {
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+      font-style: italic;
+    }
+
+    .badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: rgba(180, 138, 66, 0.16);
+      color: var(--brown);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px 16px 34px;
+      color: var(--muted);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: flex-end;
+      background: rgba(0,0,0,0.52);
+      z-index: 50;
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      background: var(--paper);
+      border-radius: 22px 22px 0 0;
+      padding: 18px;
+      animation: rise .18s ease-out;
+    }
+
+    @keyframes rise {
+      from { transform: translateY(24px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-img {
+      width: 100%;
+      height: 190px;
+      border-radius: 16px;
+      background:
+        radial-gradient(circle at 30% 30%, #d6a85f, transparent 35%),
+        linear-gradient(135deg, #6b321d, #d9a755);
+      margin-bottom: 14px;
+      overflow: hidden;
+    }
+
+    .modal-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal h2 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .modal .price {
+      margin: 8px 0;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .modal p {
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .close-btn {
+      width: 100%;
+      border: none;
+      background: var(--navy);
+      color: white;
+      padding: 13px;
+      border-radius: 12px;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>EFES Restaurant</h1>
-  <p>Digital menu is being prepared.</p>
+  <div class="app">
+    <header>
+      <div class="brand">EFES</div>
+      <div class="subtitle">RESTAURANT MENU</div>
+    </header>
+
+    <nav class="main-tabs" id="mainTabs"></nav>
+    <nav class="category-tabs" id="categoryTabs"></nav>
+
+    <section class="hero">
+      <h1 id="heroTitle">MAIN MENU</h1>
+      <p id="heroText">Turkish & Mediterranean Cuisine</p>
+    </section>
+
+    <div class="search-box">
+      <input id="searchInput" type="search" placeholder="Search menu..." />
+    </div>
+
+    <h2 class="section-title" id="sectionTitle">Starters</h2>
+
+    <main class="menu-list" id="menuList"></main>
+
+    <footer>
+      EFES Restaurant • Prices may change without prior notice.
+    </footer>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-card">
+      <div class="modal-img" id="modalImage"></div>
+      <h2 id="modalName"></h2>
+      <div class="price" id="modalPrice"></div>
+      <p id="modalDesc"></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const MENU = {
+      "Main Menu": {
+        text: "Turkish & Mediterranean Cuisine",
+        categories: {
+          "Starters": [
+            {
+              name: "Houmous",
+              price: "£7.95",
+              desc: "Creamy chickpea puree with tahini.",
+              tag: "Cold Starter",
+              image: ""
+            },
+            {
+              name: "Shakshuka",
+              price: "£8.95",
+              desc: "Peppers, tomatoes and onions in a rich sauce.",
+              tag: "Cold Starter",
+              image: ""
+            },
+            {
+              name: "Atom",
+              price: "£6.95",
+              desc: "Spicy yoghurt dip with garlic and chilli.",
+              tag: "Cold Starter",
+              image: ""
+            },
+            {
+              name: "Falafel",
+              price: "£6.95",
+              desc: "Crispy chickpea fritters, herbs and spices, served with garlic yoghurt.",
+              tag: "Hot Starter",
+              image: ""
+            }
+          ],
+          "Main Course": [
+            {
+              name: "Adana Kebab",
+              price: "£19.95",
+              desc: "Served with rice or chips on appropriate dishes.",
+              tag: "Grill",
+              image: ""
+            },
+            {
+              name: "Lamb Shish Kebab",
+              price: "£19.95",
+              desc: "Chargrilled lamb pieces served with garnish.",
+              tag: "Grill",
+              image: ""
+            },
+            {
+              name: "Chicken Shish",
+              price: "£17.95",
+              desc: "Chargrilled chicken served with rice or chips.",
+              tag: "Grill",
+              image: ""
+            },
+            {
+              name: "Iskender Kebab",
+              price: "£20.95",
+              desc: "Traditional Turkish kebab served with sauce and yoghurt.",
+              tag: "House Special",
+              image: ""
+            },
+            {
+              name: "Lamb Döner",
+              price: "£18.50",
+              desc: "Sliced lamb döner served with garnish.",
+              tag: "Döner",
+              image: ""
+            }
+          ],
+          "Fish Plates": [
+            {
+              name: "Grilled Seabass",
+              price: "£26.95",
+              desc: "Fresh grilled seabass.",
+              tag: "Fish",
+              image: ""
+            },
+            {
+              name: "Grilled Sea Bream",
+              price: "£26.95",
+              desc: "Fresh grilled sea bream.",
+              tag: "Fish",
+              image: ""
+            }
+          ],
+          "Wraps & Burgers": [
+            {
+              name: "Adana Wrap",
+              price: "£11.95",
+              desc: "All wraps and burgers are served with side salad, sauce and chips.",
+              tag: "Wrap",
+              image: ""
+            },
+            {
+              name: "Chicken Döner Wrap",
+              price: "£10.95",
+              desc: "Served with side salad, sauce and chips.",
+              tag: "Wrap",
+              image: ""
+            },
+            {
+              name: "Homemade Efes Special Burger",
+              price: "£12.95",
+              desc: "Served with side salad, sauce and chips.",
+              tag: "Burger",
+              image: ""
+            }
+          ],
+          "Desserts": [
+            {
+              name: "Baklava",
+              price: "£7.95",
+              desc: "Layers of filo pastry with pistachios and syrup.",
+              tag: "Dessert",
+              image: ""
+            },
+            {
+              name: "Kunefe",
+              price: "£9.95",
+              desc: "Shredded pastry with cheese, baked and soaked in syrup.",
+              tag: "Dessert",
+              image: ""
+            }
+          ]
+        }
+      },
+
+      "Drinks": {
+        text: "Wines • Cocktails • Spirits • Soft Drinks",
+        categories: {
+          "Soft Drinks": [
+            {
+              name: "Still Water",
+              price: "£2.45",
+              desc: "Small bottle.",
+              tag: "Soft Drink",
+              image: ""
+            },
+            {
+              name: "Coke",
+              price: "£2.95",
+              desc: "",
+              tag: "Soft Drink",
+              image: ""
+            },
+            {
+              name: "Ayran",
+              price: "£2.45",
+              desc: "Traditional yoghurt drink.",
+              tag: "Soft Drink",
+              image: ""
+            }
+          ],
+          "Hot Drinks": [
+            {
+              name: "Turkish Coffee",
+              price: "£3.00",
+              desc: "",
+              tag: "Hot Drink",
+              image: ""
+            },
+            {
+              name: "Turkish Tea",
+              price: "£1.50",
+              desc: "",
+              tag: "Hot Drink",
+              image: ""
+            },
+            {
+              name: "Latte",
+              price: "£3.50",
+              desc: "",
+              tag: "Hot Drink",
+              image: ""
+            }
+          ],
+          "Cocktails": [
+            {
+              name: "Espresso Martini",
+              price: "£9.50",
+              desc: "A sumptuous and elegant mix of vodka, coffee liqueur and espresso.",
+              tag: "Cocktail",
+              image: ""
+            },
+            {
+              name: "Mojito",
+              price: "£9.50",
+              desc: "A refreshing mix of bacardi, fresh mint and lime.",
+              tag: "Cocktail",
+              image: ""
+            }
+          ]
+        }
+      },
+
+      "Breakfast": {
+        text: "Traditional Turkish Breakfast",
+        categories: {
+          "Traditional Favorites": [
+            {
+              name: "Turkish Breakfast on the Plate",
+              price: "£10.90",
+              desc: "Olives, cheese selections, honey, tomatoes, cucumber, sucuk, marmalade and butter.",
+              tag: "Breakfast",
+              image: ""
+            },
+            {
+              name: "English Breakfast on the Plate",
+              price: "£10.90",
+              desc: "Egg, baked spinach, cheese rolls, chicken sausages, tomatoes, beans, fried mushroom and marinated potatoes.",
+              tag: "Breakfast",
+              image: ""
+            },
+            {
+              name: "Turkish Menemen",
+              price: "£10.90",
+              desc: "Turkish scrambled eggs with tomatoes and peppers.",
+              tag: "Breakfast",
+              image: ""
+            }
+          ],
+          "Breakfast Drinks": [
+            {
+              name: "Turkish Tea",
+              price: "£3",
+              desc: "",
+              tag: "Hot Drink",
+              image: ""
+            },
+            {
+              name: "Turkish Coffee",
+              price: "£4",
+              desc: "",
+              tag: "Hot Drink",
+              image: ""
+            },
+            {
+              name: "Orange Juice",
+              price: "£3.5",
+              desc: "",
+              tag: "Cold Drink",
+              image: ""
+            }
+          ]
+        }
+      }
+    };
+
+    let currentMain = "Main Menu";
+    let currentCategory = "Starters";
+    let searchTerm = "";
+
+    const mainTabs = document.getElementById("mainTabs");
+    const categoryTabs = document.getElementById("categoryTabs");
+    const menuList = document.getElementById("menuList");
+    const heroTitle = document.getElementById("heroTitle");
+    const heroText = document.getElementById("heroText");
+    const sectionTitle = document.getElementById("sectionTitle");
+    const searchInput = document.getElementById("searchInput");
+
+    function renderMainTabs() {
+      mainTabs.innerHTML = "";
+      Object.keys(MENU).forEach(main => {
+        const btn = document.createElement("button");
+        btn.textContent = main;
+        btn.className = main === currentMain ? "active" : "";
+        btn.onclick = () => {
+          currentMain = main;
+          currentCategory = Object.keys(MENU[currentMain].categories)[0];
+          searchTerm = "";
+          searchInput.value = "";
+          render();
+        };
+        mainTabs.appendChild(btn);
+      });
+    }
+
+    function renderCategoryTabs() {
+      categoryTabs.innerHTML = "";
+      Object.keys(MENU[currentMain].categories).forEach(cat => {
+        const btn = document.createElement("button");
+        btn.textContent = cat;
+        btn.className = cat === currentCategory ? "active" : "";
+        btn.onclick = () => {
+          currentCategory = cat;
+          render();
+        };
+        categoryTabs.appendChild(btn);
+      });
+    }
+
+    function renderItems() {
+      const items = MENU[currentMain].categories[currentCategory].filter(item => {
+        const text = `${item.name} ${item.desc} ${item.tag}`.toLowerCase();
+        return text.includes(searchTerm.toLowerCase());
+      });
+
+      menuList.innerHTML = "";
+
+      if (items.length === 0) {
+        menuList.innerHTML = `<p style="padding:16px;color:#7a6a58;">No item found.</p>`;
+        return;
+      }
+
+      items.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.onclick = () => openModal(item);
+
+        div.innerHTML = `
+          <div class="item-img">
+            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : ""}
+          </div>
+          <div class="item-main">
+            <div class="item-top">
+              <div class="item-name">${item.name}</div>
+              <div class="item-price">${item.price}</div>
+            </div>
+            ${item.desc ? `<div class="item-desc">${item.desc}</div>` : ""}
+            ${item.tag ? `<span class="badge">${item.tag}</span>` : ""}
+          </div>
+        `;
+
+        menuList.appendChild(div);
+      });
+    }
+
+    function render() {
+      heroTitle.textContent = currentMain.toUpperCase();
+      heroText.textContent = MENU[currentMain].text;
+      sectionTitle.textContent = currentCategory;
+      renderMainTabs();
+      renderCategoryTabs();
+      renderItems();
+    }
+
+    searchInput.addEventListener("input", e => {
+      searchTerm = e.target.value;
+      renderItems();
+    });
+
+    function openModal(item) {
+      document.getElementById("modalName").textContent = item.name;
+      document.getElementById("modalPrice").textContent = item.price;
+      document.getElementById("modalDesc").textContent = item.desc || "No description available.";
+
+      const modalImage = document.getElementById("modalImage");
+      modalImage.innerHTML = item.image ? `<img src="${item.image}" alt="${item.name}">` : "";
+
+      document.getElementById("modal").classList.add("open");
+    }
+
+    function closeModal() {
+      document.getElementById("modal").classList.remove("open");
+    }
+
+    document.getElementById("modal").addEventListener("click", function(e) {
+      if (e.target.id === "modal") closeModal();
+    });
+
+    render();
+  </script>
 </body>
 </html>
