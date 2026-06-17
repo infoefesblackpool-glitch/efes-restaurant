@@ -190,7 +190,7 @@
       display: flex;
       justify-content: space-between;
       gap: 10px;
-      align-items: baseline;
+      align-items: flex-start;
     }
 
     .item-name {
@@ -200,10 +200,13 @@
     }
 
     .item-price {
-      font-size: 16px;
+      max-width: 48%;
+      font-size: 15px;
       font-weight: 700;
       color: var(--brown);
-      white-space: nowrap;
+      text-align: right;
+      white-space: normal;
+      line-height: 1.3;
     }
 
     .item-desc {
@@ -330,7 +333,7 @@
       <input id="searchInput" type="search" placeholder="Search menu..." />
     </div>
 
-    <h2 class="section-title" id="sectionTitle">Starters</h2>
+    <h2 class="section-title" id="sectionTitle">Chef's Choice Soup</h2>
 
     <main class="menu-list" id="menuList"></main>
 
@@ -352,263 +355,1292 @@
   <script>
     const MENU = {
       "Main Menu": {
-        text: "Turkish & Mediterranean Cuisine",
-        categories: {
-          "Starters": [
-            {
-              name: "Houmous",
-              price: "£7.95",
-              desc: "Creamy chickpea puree with tahini.",
-              tag: "Cold Starter",
-              image: ""
-            },
-            {
-              name: "Shakshuka",
-              price: "£8.95",
-              desc: "Peppers, tomatoes and onions in a rich sauce.",
-              tag: "Cold Starter",
-              image: ""
-            },
-            {
-              name: "Atom",
-              price: "£6.95",
-              desc: "Spicy yoghurt dip with garlic and chilli.",
-              tag: "Cold Starter",
-              image: ""
-            },
-            {
-              name: "Falafel",
-              price: "£6.95",
-              desc: "Crispy chickpea fritters, herbs and spices, served with garlic yoghurt.",
-              tag: "Hot Starter",
-              image: ""
+            "text": "Turkish & Mediterranean Cuisine",
+            "categories": {
+                  "Chef's Choice Soup": [
+                        {
+                              "name": "Soup of the Day",
+                              "price": "£9.95",
+                              "desc": "Ask for availability.",
+                              "tag": "Soup",
+                              "image": "images/soup-of-the-day.png"
+                        }
+                  ],
+                  "Cold Starters Mezes": [
+                        {
+                              "name": "Houmous",
+                              "price": "£7.95",
+                              "desc": "Creamy chickpea puree with tahini.",
+                              "tag": "Cold Starter",
+                              "image": "images/houmous.png"
+                        },
+                        {
+                              "name": "Shakshuka",
+                              "price": "£8.95",
+                              "desc": "Peppers, tomatoes and onions in a rich sauce.",
+                              "tag": "Cold Starter",
+                              "image": "images/shakshuka.png"
+                        },
+                        {
+                              "name": "Atom",
+                              "price": "£6.95",
+                              "desc": "Spicy yoghurt dip with garlic and chilli.",
+                              "tag": "Cold Starter",
+                              "image": "images/atom.png"
+                        },
+                        {
+                              "name": "Cold Mixed Meze",
+                              "price": "£15.95",
+                              "desc": "A selection of our finest cold dips and salads.",
+                              "tag": "Cold Starter",
+                              "image": "images/cold-mixed-meze.png"
+                        },
+                        {
+                              "name": "Babaghanoush",
+                              "price": "£8.95",
+                              "desc": "Smoked aubergine dip with tahini.",
+                              "tag": "Cold Starter",
+                              "image": "images/babaghanoush.png"
+                        },
+                        {
+                              "name": "Feta Cheese",
+                              "price": "£6.95",
+                              "desc": "Creamy feta served with herbs and olive oil.",
+                              "tag": "Cold Starter",
+                              "image": "images/feta-cheese.png"
+                        },
+                        {
+                              "name": "Cansu's Olive Salad",
+                              "price": "£7.95",
+                              "desc": "Mediterranean olives with herbs and lemon.",
+                              "tag": "Cold Starter",
+                              "image": "images/cansus-olive-salad.png"
+                        },
+                        {
+                              "name": "Turkish Cacik",
+                              "price": "£7.95",
+                              "desc": "Refreshing yoghurt with cucumber and garlic.",
+                              "tag": "Cold Starter",
+                              "image": "images/turkish-cacik.png"
+                        },
+                        {
+                              "name": "Ezme Salad",
+                              "price": "£7.95",
+                              "desc": "Finely chopped tomatoes, peppers and herbs.",
+                              "tag": "Cold Starter",
+                              "image": "images/ezme-salad.png"
+                        },
+                        {
+                              "name": "Home Made Stuffed Vine Leaves",
+                              "price": "£8.95",
+                              "desc": "Vine leaves filled with seasoned rice.",
+                              "tag": "Cold Starter",
+                              "image": "images/stuffed-vine-leaves.png"
+                        }
+                  ],
+                  "Sides Orders": [
+                        {
+                              "name": "Home Made Bread",
+                              "price": "£4.45",
+                              "desc": "Warm and fresh.",
+                              "tag": "Side",
+                              "image": "images/home-made-bread.png"
+                        },
+                        {
+                              "name": "Chips",
+                              "price": "£5.45",
+                              "desc": "Crispy golden chips.",
+                              "tag": "Side",
+                              "image": "images/chips.png"
+                        },
+                        {
+                              "name": "Rice",
+                              "price": "£5.45",
+                              "desc": "Steamed rice.",
+                              "tag": "Side",
+                              "image": "images/rice.png"
+                        },
+                        {
+                              "name": "Mixed Pickle",
+                              "price": "£5.45",
+                              "desc": "A tangy mix of pickled vegetables.",
+                              "tag": "Side",
+                              "image": "images/mixed-pickle.png"
+                        },
+                        {
+                              "name": "Triple Dip",
+                              "price": "£4.95",
+                              "desc": "Houmous, cacik and ezme.",
+                              "tag": "Side",
+                              "image": "images/triple-dip.png"
+                        },
+                        {
+                              "name": "Sucuk",
+                              "price": "£6.95",
+                              "desc": "Turkish garlic sausage.",
+                              "tag": "Side",
+                              "image": "images/sucuk.png"
+                        },
+                        {
+                              "name": "Yoghurt",
+                              "price": "£4.45",
+                              "desc": "Plain thick yoghurt.",
+                              "tag": "Side",
+                              "image": "images/yoghurt.png"
+                        },
+                        {
+                              "name": "Olives And Feta Cheese",
+                              "price": "£6.95",
+                              "desc": "Marinated olives with feta.",
+                              "tag": "Side",
+                              "image": "images/olives-feta-cheese.png"
+                        },
+                        {
+                              "name": "Home Garlic Mayo",
+                              "price": "£2.10",
+                              "desc": "Creamy garlic mayonnaise.",
+                              "tag": "Sauce",
+                              "image": "images/home-garlic-mayo.png"
+                        },
+                        {
+                              "name": "Homemade Chilli Sauce",
+                              "price": "£2.10",
+                              "desc": "Spicy homemade chilli sauce.",
+                              "tag": "Sauce",
+                              "image": "images/homemade-chilli-sauce.png"
+                        }
+                  ],
+                  "Hot Starters Mezes": [
+                        {
+                              "name": "Falafel",
+                              "price": "£6.95",
+                              "desc": "Crispy chickpea fritters, herbs and spices, served with garlic yoghurt.",
+                              "tag": "Hot Starter",
+                              "image": "images/falafel.png"
+                        },
+                        {
+                              "name": "Cheese Rolls",
+                              "price": "£6.95",
+                              "desc": "Golden, crispy cheese rolls filled with feta and herbs.",
+                              "tag": "Hot Starter",
+                              "image": "images/cheese-rolls.png"
+                        },
+                        {
+                              "name": "Oven Baked Prawns",
+                              "price": "£11.95",
+                              "desc": "King prawns baked with garlic, herbs and a touch of chilli.",
+                              "tag": "Hot Starter",
+                              "image": "images/oven-baked-prawns.png"
+                        },
+                        {
+                              "name": "Oven Baked Mushrooms with Cheese",
+                              "price": "£8.95",
+                              "desc": "Mushrooms baked with cheese, herbs and a hint of garlic.",
+                              "tag": "Hot Starter",
+                              "image": "images/oven-baked-mushrooms-cheese.png"
+                        },
+                        {
+                              "name": "Mudurnu Borek",
+                              "price": "£8.95",
+                              "desc": "Traditional Turkish pastry rolls filled with cheese and parsley.",
+                              "tag": "Hot Starter",
+                              "image": "images/mudurnu-borek.png"
+                        },
+                        {
+                              "name": "Pacanga",
+                              "price": "£8.95",
+                              "desc": "Crispy fried baby onions in a light batter.",
+                              "tag": "Hot Starter",
+                              "image": "images/pacanga.png"
+                        },
+                        {
+                              "name": "Hot Mixed Meze",
+                              "price": "£18.95",
+                              "desc": "A selection of our chef's favourite warm mezes, perfect for sharing.",
+                              "tag": "Hot Starter",
+                              "image": "images/hot-mixed-meze.png"
+                        }
+                  ],
+                  "Salads": [
+                        {
+                              "name": "Tulum Cheese",
+                              "price": "£9.95",
+                              "desc": "Fresh mixed leaves, cucumbers, tomatoes, red onions and peppers with lemon dressing.",
+                              "tag": "Salad",
+                              "image": "images/tulum-cheese-salad.png"
+                        },
+                        {
+                              "name": "Halloumi Salad",
+                              "price": "£7.95",
+                              "desc": "Grilled halloumi on mixed leaves with tomatoes, cucumbers and olive oil dressing.",
+                              "tag": "Salad",
+                              "image": "images/halloumi-salad.png"
+                        },
+                        {
+                              "name": "Choban Salad",
+                              "price": "£8.95",
+                              "desc": "Classic Turkish salad of diced tomatoes, cucumbers, peppers, onion and herbs.",
+                              "tag": "Salad",
+                              "image": "images/choban-salad.png"
+                        },
+                        {
+                              "name": "Chicken Salad",
+                              "price": "£9.95",
+                              "desc": "Grilled chicken on mixed leaves with fresh vegetables and lemon dressing.",
+                              "tag": "Salad",
+                              "image": "images/chicken-salad.png"
+                        },
+                        {
+                              "name": "Falafel Salad",
+                              "price": "£9.95",
+                              "desc": "Crispy falafel on mixed leaves with fresh vegetables and tahini dressing.",
+                              "tag": "Salad",
+                              "image": "images/falafel-salad.png"
+                        }
+                  ],
+                  "Sharing Platters": [
+                        {
+                              "name": "Platter for 2–3",
+                              "price": "£49.95",
+                              "desc": "A generous selection of cold and hot mezes, dips, salads, falafel, borek, cheeses and warm breads.",
+                              "tag": "Sharing Platter",
+                              "image": "images/platter-for-2-3.png"
+                        },
+                        {
+                              "name": "Platter for 4–6",
+                              "price": "£70.95",
+                              "desc": "A lavish spread of our finest mezes, hot dishes, salads, grills, dips and breads, ideal for sharing.",
+                              "tag": "Sharing Platter",
+                              "image": "images/platter-for-4-6.png"
+                        }
+                  ],
+                  "Main Course": [
+                        {
+                              "name": "Adana Kebab",
+                              "price": "£19.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/adana-kebab.png"
+                        },
+                        {
+                              "name": "Yogurtlu Adana",
+                              "price": "£19.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/yogurtlu-adana.png"
+                        },
+                        {
+                              "name": "Efe's Special Chicken Mix Kebab",
+                              "price": "£22.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/efes-special-chicken-mix-kebab.png"
+                        },
+                        {
+                              "name": "Efe's Special Mix Kebab",
+                              "price": "£28.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/efes-special-mix-kebab.png"
+                        },
+                        {
+                              "name": "Cokertme Kebab",
+                              "price": "£22.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Main Course",
+                              "image": "images/cokertme-kebab.png"
+                        },
+                        {
+                              "name": "Lamb Chops",
+                              "price": "£22.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/lamb-chops.png"
+                        },
+                        {
+                              "name": "Lamb Shish Kebab",
+                              "price": "£19.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/lamb-shish-kebab.png"
+                        },
+                        {
+                              "name": "Chicken Shish",
+                              "price": "£17.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/chicken-shish.png"
+                        },
+                        {
+                              "name": "Chicken Doner",
+                              "price": "£15.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Döner",
+                              "image": "images/chicken-doner.png"
+                        },
+                        {
+                              "name": "Chicken Kanat (Wings)",
+                              "price": "£13.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/chicken-kanat-wings.png"
+                        },
+                        {
+                              "name": "Chicken Lokoumi",
+                              "price": "£16.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Chicken",
+                              "image": "images/chicken-lokoumi.png"
+                        },
+                        {
+                              "name": "Spicy Chicken Lokoumi",
+                              "price": "£16.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Chicken",
+                              "image": "images/spicy-chicken-lokoumi.png"
+                        },
+                        {
+                              "name": "Oregano Chicken Lokoumi",
+                              "price": "£17.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Chicken",
+                              "image": "images/oregano-chicken-lokoumi.png"
+                        },
+                        {
+                              "name": "Turkish Oven Baked Pasta",
+                              "price": "£14.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Main Course",
+                              "image": "images/turkish-oven-baked-pasta.png"
+                        },
+                        {
+                              "name": "Combination Mix Kebab",
+                              "price": "£21.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Grill",
+                              "image": "images/combination-mix-kebab.png"
+                        },
+                        {
+                              "name": "Iskender Kebab",
+                              "price": "£20.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "House Special",
+                              "image": "images/iskender-kebab.png"
+                        },
+                        {
+                              "name": "Lamb Döner",
+                              "price": "£18.50",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Döner",
+                              "image": "images/lamb-doner.png"
+                        }
+                  ],
+                  "Fish Plates": [
+                        {
+                              "name": "Grilled Seabass",
+                              "price": "£26.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Fish",
+                              "image": "images/grilled-seabass.png"
+                        },
+                        {
+                              "name": "Grilled Sea Bream",
+                              "price": "£26.95",
+                              "desc": "Served with rice or chips on appropriate dishes.",
+                              "tag": "Fish",
+                              "image": "images/grilled-sea-bream.png"
+                        }
+                  ],
+                  "Wraps & Burgers": [
+                        {
+                              "name": "Adana Wrap",
+                              "price": "£11.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Wrap",
+                              "image": "images/adana-wrap.png"
+                        },
+                        {
+                              "name": "Halloumi Wrap",
+                              "price": "£10.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Wrap",
+                              "image": "images/halloumi-wrap.png"
+                        },
+                        {
+                              "name": "Lamb Shish Wrap",
+                              "price": "£11.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Wrap",
+                              "image": "images/lamb-shish-wrap.png"
+                        },
+                        {
+                              "name": "Chicken Shish Wrap",
+                              "price": "£11.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Wrap",
+                              "image": "images/chicken-shish-wrap.png"
+                        },
+                        {
+                              "name": "Chicken Doner Wrap",
+                              "price": "£10.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Wrap",
+                              "image": "images/chicken-doner-wrap.png"
+                        },
+                        {
+                              "name": "Falafel Wrap",
+                              "price": "£10.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Wrap",
+                              "image": "images/falafel-wrap.png"
+                        },
+                        {
+                              "name": "Homemade Efe's Special Burger",
+                              "price": "£12.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Burger",
+                              "image": "images/efes-special-burger.png"
+                        },
+                        {
+                              "name": "Falafel Burger",
+                              "price": "£10.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Burger",
+                              "image": "images/falafel-burger.png"
+                        },
+                        {
+                              "name": "Homemade Cheese Burger",
+                              "price": "£11.95",
+                              "desc": "Served with a side salad, your choice of sauce and chips.",
+                              "tag": "Burger",
+                              "image": "images/homemade-cheese-burger.png"
+                        }
+                  ],
+                  "Kids Menu": [
+                        {
+                              "name": "Chicken Shish",
+                              "price": "£9.95",
+                              "desc": "",
+                              "tag": "Kids",
+                              "image": "images/kids-chicken-shish.png"
+                        },
+                        {
+                              "name": "Halloumi",
+                              "price": "£9.95",
+                              "desc": "",
+                              "tag": "Kids",
+                              "image": "images/kids-halloumi.png"
+                        },
+                        {
+                              "name": "Meatballs",
+                              "price": "£9.95",
+                              "desc": "",
+                              "tag": "Kids",
+                              "image": "images/kids-meatballs.png"
+                        },
+                        {
+                              "name": "Beef Burger",
+                              "price": "£9.95",
+                              "desc": "",
+                              "tag": "Kids",
+                              "image": "images/kids-beef-burger.png"
+                        },
+                        {
+                              "name": "Sucuk (Turkish Garlic Sausage)",
+                              "price": "£9.95",
+                              "desc": "",
+                              "tag": "Kids",
+                              "image": "images/kids-sucuk.png"
+                        },
+                        {
+                              "name": "Chicken Nuggets",
+                              "price": "£9.95",
+                              "desc": "",
+                              "tag": "Kids",
+                              "image": "images/kids-chicken-nuggets.png"
+                        }
+                  ],
+                  "Desserts": [
+                        {
+                              "name": "Baklava",
+                              "price": "£7.95",
+                              "desc": "Layers of filo pastry with pistachios and syrup.",
+                              "tag": "Dessert",
+                              "image": "images/baklava.png"
+                        },
+                        {
+                              "name": "Kunefe",
+                              "price": "£9.95",
+                              "desc": "Shredded pastry with cheese, baked and soaked in syrup.",
+                              "tag": "Dessert",
+                              "image": "images/kunefe.png"
+                        },
+                        {
+                              "name": "Turkish Ice Cream",
+                              "price": "£6.95",
+                              "desc": "Creamy, stretchy ice cream with a unique texture.",
+                              "tag": "Dessert",
+                              "image": "images/turkish-ice-cream.png"
+                        },
+                        {
+                              "name": "Katmer",
+                              "price": "£9.95",
+                              "desc": "Thin pastry filled with pistachio paste and cream.",
+                              "tag": "Dessert",
+                              "image": "images/katmer.png"
+                        },
+                        {
+                              "name": "Homemade Oven Baked Rice Pudding",
+                              "price": "£7.95",
+                              "desc": "Traditional Turkish rice pudding, baked to perfection.",
+                              "tag": "Dessert",
+                              "image": "images/rice-pudding.png"
+                        },
+                        {
+                              "name": "Pistachio Roll",
+                              "price": "£9.95",
+                              "desc": "Filo pastry roll filled with pistachio and syrup.",
+                              "tag": "Dessert",
+                              "image": "images/pistachio-roll.png"
+                        },
+                        {
+                              "name": "Homemade Chocolate Souffle with Tahini",
+                              "price": "£9.95",
+                              "desc": "Warm chocolate souffle with a tahini centre.",
+                              "tag": "Dessert",
+                              "image": "images/chocolate-souffle-tahini.png"
+                        }
+                  ]
             }
-          ],
-          "Main Course": [
-            {
-              name: "Adana Kebab",
-              price: "£19.95",
-              desc: "Served with rice or chips on appropriate dishes.",
-              tag: "Grill",
-              image: "images/adana-kebab.png"
-            },
-             {
-    name: "Yogurtlu Adana",
-    price: "£19.95",
-    desc: "Adana kebab served with yoghurt and traditional sauce.",
-    tag: "Grill",
-    image: "images/yogurtlu-adana.png"
-  },
-            {
-              name: "Lamb Shish Kebab",
-              price: "£19.95",
-              desc: "Chargrilled lamb pieces served with garnish.",
-              tag: "Grill",
-              image: ""
-            },
-            {
-              name: "Chicken Shish",
-              price: "£17.95",
-              desc: "Chargrilled chicken served with rice or chips.",
-              tag: "Grill",
-              image: ""
-            },
-            {
-              name: "Iskender Kebab",
-              price: "£20.95",
-              desc: "Traditional Turkish kebab served with sauce and yoghurt.",
-              tag: "House Special",
-              image: ""
-            },
-            {
-              name: "Lamb Döner",
-              price: "£18.50",
-              desc: "Sliced lamb döner served with garnish.",
-              tag: "Döner",
-              image: ""
-            }
-          ],
-          "Fish Plates": [
-            {
-              name: "Grilled Seabass",
-              price: "£26.95",
-              desc: "Fresh grilled seabass.",
-              tag: "Fish",
-              image: ""
-            },
-            {
-              name: "Grilled Sea Bream",
-              price: "£26.95",
-              desc: "Fresh grilled sea bream.",
-              tag: "Fish",
-              image: ""
-            }
-          ],
-          "Wraps & Burgers": [
-            {
-              name: "Adana Wrap",
-              price: "£11.95",
-              desc: "All wraps and burgers are served with side salad, sauce and chips.",
-              tag: "Wrap",
-              image: ""
-            },
-            {
-              name: "Chicken Döner Wrap",
-              price: "£10.95",
-              desc: "Served with side salad, sauce and chips.",
-              tag: "Wrap",
-              image: ""
-            },
-            {
-              name: "Homemade Efes Special Burger",
-              price: "£12.95",
-              desc: "Served with side salad, sauce and chips.",
-              tag: "Burger",
-              image: ""
-            }
-          ],
-          "Desserts": [
-            {
-              name: "Baklava",
-              price: "£7.95",
-              desc: "Layers of filo pastry with pistachios and syrup.",
-              tag: "Dessert",
-              image: ""
-            },
-            {
-              name: "Kunefe",
-              price: "£9.95",
-              desc: "Shredded pastry with cheese, baked and soaked in syrup.",
-              tag: "Dessert",
-              image: ""
-            }
-          ]
-        }
       },
-
       "Drinks": {
-        text: "Wines • Cocktails • Spirits • Soft Drinks",
-        categories: {
-          "Soft Drinks": [
-            {
-              name: "Still Water",
-              price: "£2.45",
-              desc: "Small bottle.",
-              tag: "Soft Drink",
-              image: ""
-            },
-            {
-              name: "Coke",
-              price: "£2.95",
-              desc: "",
-              tag: "Soft Drink",
-              image: ""
-            },
-            {
-              name: "Ayran",
-              price: "£2.45",
-              desc: "Traditional yoghurt drink.",
-              tag: "Soft Drink",
-              image: ""
+            "text": "Wines • Cocktails • Spirits • Soft Drinks",
+            "categories": {
+                  "Beer, Cider & Raki": [
+                        {
+                              "name": "Efe's Draught",
+                              "price": "£4.95",
+                              "desc": "Bottle",
+                              "tag": "Beer",
+                              "image": "images/efes-draught.png"
+                        },
+                        {
+                              "name": "Peroni",
+                              "price": "£3.95",
+                              "desc": "Bottle",
+                              "tag": "Beer",
+                              "image": "images/peroni.png"
+                        },
+                        {
+                              "name": "Corona",
+                              "price": "£3.95",
+                              "desc": "Bottle",
+                              "tag": "Beer",
+                              "image": "images/corona.png"
+                        },
+                        {
+                              "name": "Stella",
+                              "price": "£3.95",
+                              "desc": "Bottle",
+                              "tag": "Beer",
+                              "image": "images/stella.png"
+                        },
+                        {
+                              "name": "Kiwi and Lime Cider",
+                              "price": "£4.95",
+                              "desc": "",
+                              "tag": "Cider",
+                              "image": "images/kiwi-lime-cider.png"
+                        },
+                        {
+                              "name": "Mixed Berries Cider",
+                              "price": "£4.95",
+                              "desc": "",
+                              "tag": "Cider",
+                              "image": "images/mixed-berries-cider.png"
+                        },
+                        {
+                              "name": "Apple Cider",
+                              "price": "£4.95",
+                              "desc": "",
+                              "tag": "Cider",
+                              "image": "images/apple-cider.png"
+                        },
+                        {
+                              "name": "Mango & Passionfruit Cider",
+                              "price": "£4.95",
+                              "desc": "",
+                              "tag": "Cider",
+                              "image": "images/mango-passionfruit-cider.png"
+                        },
+                        {
+                              "name": "Peroni 0.0% Alcohol Free",
+                              "price": "£3.95",
+                              "desc": "",
+                              "tag": "Alcohol Free",
+                              "image": "images/peroni-zero.png"
+                        },
+                        {
+                              "name": "Yeni Raki",
+                              "price": "25ml £4.00 • 50ml £6.00 • 35cl £27.95 • 70cl £54.95",
+                              "desc": "",
+                              "tag": "Raki",
+                              "image": "images/yeni-raki.png"
+                        },
+                        {
+                              "name": "Efe Gold",
+                              "price": "25ml £4.50 • 50ml £6.50 • 35cl £32.95 • 70cl £60.95",
+                              "desc": "",
+                              "tag": "Raki",
+                              "image": "images/efe-gold-raki.png"
+                        },
+                        {
+                              "name": "Tekirdag Gold",
+                              "price": "35cl £32.95 • 70cl £60.95",
+                              "desc": "",
+                              "tag": "Raki",
+                              "image": "images/tekirdag-gold-raki.png"
+                        }
+                  ],
+                  "Spirits": [
+                        {
+                              "name": "Gordon's Dry Gin",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/gordons-dry-gin.png"
+                        },
+                        {
+                              "name": "Gordon's Pink Gin",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/gordons-pink-gin.png"
+                        },
+                        {
+                              "name": "Gordon's Peach",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/gordons-peach.png"
+                        },
+                        {
+                              "name": "Gordon's Orange",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/gordons-orange.png"
+                        },
+                        {
+                              "name": "Malibu",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/malibu.png"
+                        },
+                        {
+                              "name": "Disaronno",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/disaronno.png"
+                        },
+                        {
+                              "name": "Bacardi",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/bacardi.png"
+                        },
+                        {
+                              "name": "Amaretto",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/amaretto.png"
+                        },
+                        {
+                              "name": "Captain Morgan (Spiced Gold)",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/captain-morgan-spiced-gold.png"
+                        },
+                        {
+                              "name": "Smirnoff",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/smirnoff.png"
+                        },
+                        {
+                              "name": "Jack Daniels",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/jack-daniels.png"
+                        },
+                        {
+                              "name": "The Kraken",
+                              "price": "25ml £7.95 • 50ml £9.95",
+                              "desc": "",
+                              "tag": "Spirit",
+                              "image": "images/the-kraken.png"
+                        }
+                  ],
+                  "Shots": [
+                        {
+                              "name": "Limoncello",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Shot",
+                              "image": "images/limoncello-shot.png"
+                        },
+                        {
+                              "name": "Baby Guinness",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Shot",
+                              "image": "images/baby-guinness.png"
+                        },
+                        {
+                              "name": "Tequila Rose",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Shot",
+                              "image": "images/tequila-rose.png"
+                        },
+                        {
+                              "name": "Lemon Drop",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Shot",
+                              "image": "images/lemon-drop.png"
+                        }
+                  ],
+                  "Soft Drinks": [
+                        {
+                              "name": "Still Water",
+                              "price": "Small £2.45 • Large £3.95",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/still-water.png"
+                        },
+                        {
+                              "name": "Sparkling Water",
+                              "price": "Small £2.45 • Large £3.95",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/sparkling-water.png"
+                        },
+                        {
+                              "name": "Orange Juice",
+                              "price": "£2.50",
+                              "desc": "",
+                              "tag": "Juice",
+                              "image": "images/orange-juice.png"
+                        },
+                        {
+                              "name": "Apple Juice",
+                              "price": "£2.50",
+                              "desc": "",
+                              "tag": "Juice",
+                              "image": "images/apple-juice.png"
+                        },
+                        {
+                              "name": "Cranberry Juice",
+                              "price": "£2.50",
+                              "desc": "",
+                              "tag": "Juice",
+                              "image": "images/cranberry-juice.png"
+                        },
+                        {
+                              "name": "Pineapple Juice",
+                              "price": "£2.90",
+                              "desc": "",
+                              "tag": "Juice",
+                              "image": "images/pineapple-juice.png"
+                        },
+                        {
+                              "name": "Coke",
+                              "price": "£2.95",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/coke.png"
+                        },
+                        {
+                              "name": "Diet Coke",
+                              "price": "£2.95",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/diet-coke.png"
+                        },
+                        {
+                              "name": "Tonic Water",
+                              "price": "£2.45",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/tonic-water.png"
+                        },
+                        {
+                              "name": "Fanta Orange",
+                              "price": "£2.95",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/fanta-orange.png"
+                        },
+                        {
+                              "name": "Sprite / 7UP",
+                              "price": "£2.95",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/sprite-7up.png"
+                        },
+                        {
+                              "name": "Salgam",
+                              "price": "£2.45",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/salgam.png"
+                        },
+                        {
+                              "name": "Ayran",
+                              "price": "£2.45",
+                              "desc": "",
+                              "tag": "Soft Drink",
+                              "image": "images/ayran.png"
+                        }
+                  ],
+                  "Hot Drinks": [
+                        {
+                              "name": "Turkish Coffee",
+                              "price": "£3.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/turkish-coffee.png"
+                        },
+                        {
+                              "name": "Turkish Tea",
+                              "price": "£1.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/turkish-tea.png"
+                        },
+                        {
+                              "name": "Espresso",
+                              "price": "£2.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/espresso.png"
+                        },
+                        {
+                              "name": "Americano Black",
+                              "price": "£3.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/americano-black.png"
+                        },
+                        {
+                              "name": "Americano White",
+                              "price": "£3.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/americano-white.png"
+                        },
+                        {
+                              "name": "Latte",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/latte.png"
+                        },
+                        {
+                              "name": "Cappuccino",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/cappuccino.png"
+                        },
+                        {
+                              "name": "Tea (Peppermint, Earl Grey, Fruit Tea)",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/herbal-tea.png"
+                        }
+                  ],
+                  "White Wine": [
+                        {
+                              "name": "House White",
+                              "price": "175ml £4.95 • 250ml £5.95 • Bottle £15.95",
+                              "desc": "The nose is soft with notes of white peach and green apple. In the mouth there is a balance of fruit and acidity giving a pleasing elegance and a hint of aniseed on the finish.",
+                              "tag": "White Wine",
+                              "image": "images/house-white-wine.png"
+                        },
+                        {
+                              "name": "Cankaya (Turkish Dry)",
+                              "price": "Bottle £27.95",
+                              "desc": "A bright yellow Anatolian wine, with citrus and white fruit aromas such as apple, peach and apricot.",
+                              "tag": "White Wine",
+                              "image": "images/cankaya-white-wine.png"
+                        },
+                        {
+                              "name": "Lyrarakis Assyrtiko",
+                              "price": "Bottle £26.95",
+                              "desc": "Rich and flinty Greek white wine with waves of green apple, citrus and spices.",
+                              "tag": "White Wine",
+                              "image": "images/lyrarakis-assyrtiko.png"
+                        },
+                        {
+                              "name": "The Guv'nor White",
+                              "price": "Bottle £25.95",
+                              "desc": "A bold and full bodied blend of Verdejo and Sauvignon Blanc with some oak-aged Chardonnay to dial up the richness.",
+                              "tag": "White Wine",
+                              "image": "images/guvnor-white-wine.png"
+                        },
+                        {
+                              "name": "Gavi",
+                              "price": "Bottle £28.00",
+                              "desc": "Bright straw yellow in colour. Floral with notes of hawthorn and acacia blossom and scents of almond. Elegant and crisp, smooth with medium persistence.",
+                              "tag": "White Wine",
+                              "image": "images/gavi-white-wine.png"
+                        },
+                        {
+                              "name": "Falanghina Puglia",
+                              "price": "Bottle £23.00",
+                              "desc": "Straw yellow in colour. Floral with notes of white flowers and intense fruity aroma. Crisp and velvety with a persistent finish.",
+                              "tag": "White Wine",
+                              "image": "images/falanghina-puglia.png"
+                        },
+                        {
+                              "name": "Pinot Grigio Delle Venezie",
+                              "price": "Bottle £24.00",
+                              "desc": "Reveals scents of broom with a fresh, herbaceous undertone reminiscent of the scent of pine trees in spring. Dry, balanced and harmonious.",
+                              "tag": "White Wine",
+                              "image": "images/pinot-grigio-delle-venezie.png"
+                        },
+                        {
+                              "name": "Sauvignon Blanc",
+                              "price": "Bottle £23.00",
+                              "desc": "Straw yellow in colour. Herbaceous and fruity. Crisp, elegant.",
+                              "tag": "White Wine",
+                              "image": "images/sauvignon-blanc.png"
+                        }
+                  ],
+                  "Rosé Wine": [
+                        {
+                              "name": "House Rosé",
+                              "price": "175ml £4.95 • 250ml £5.95 • Bottle £15.95",
+                              "desc": "Cherry pink in colour, the nose is crisp and elegant with fruity scents and notes of peach blossom. Dry, with a good structure, pleasantly persistent.",
+                              "tag": "Rosé Wine",
+                              "image": "images/house-rose-wine.png"
+                        },
+                        {
+                              "name": "The Guv'nor Rosé",
+                              "price": "Bottle £25.95",
+                              "desc": "A blend of Garnacha, Bobal and Tempranillo grapes bringing together a bouquet dominated by red fruit flavors.",
+                              "tag": "Rosé Wine",
+                              "image": "images/guvnor-rose-wine.png"
+                        },
+                        {
+                              "name": "Zinfandel Rosé",
+                              "price": "Bottle £20.00",
+                              "desc": "Bursting with ripe summer fruits. Expect notes of strawberries and red cherries, with a dash of sweetness.",
+                              "tag": "Rosé Wine",
+                              "image": "images/zinfandel-rose.png"
+                        }
+                  ],
+                  "Red Wine": [
+                        {
+                              "name": "House Red",
+                              "price": "175ml £4.25 • 250ml £5.75 • Bottle £16.50",
+                              "desc": "The bouquet is soft and fruity with blackberries and blueberries dominating. In the mouth the fruit is both fresh and lightly spicy.",
+                              "tag": "Red Wine",
+                              "image": "images/house-red-wine.png"
+                        },
+                        {
+                              "name": "Yakut (Turkish Dry)",
+                              "price": "Bottle £27.95",
+                              "desc": "A medium bodied Turkish wine with well-balanced combination of fruit flavours with notes of dark berry fruits. Made from a blend of Okuzgozu, Alicante and Carignan grapes.",
+                              "tag": "Red Wine",
+                              "image": "images/yakut-red-wine.png"
+                        },
+                        {
+                              "name": "The Guv'nor Red",
+                              "price": "Bottle £25.95",
+                              "desc": "A blend of Tempranillo and Shiraz grapes with aromas of rich, ripe dark fruits, and a subtle hint of vanilla.",
+                              "tag": "Red Wine",
+                              "image": "images/guvnor-red-wine.png"
+                        },
+                        {
+                              "name": "Chianti",
+                              "price": "Bottle £26.00",
+                              "desc": "A quintessential Tuscan wine. Enveloping aroma with notes of fruits of the forest. Full and balanced on the palate with a soft, fruity finish.",
+                              "tag": "Red Wine",
+                              "image": "images/chianti.png"
+                        },
+                        {
+                              "name": "Ripasso Valpolicella Superiore",
+                              "price": "Bottle £29.00",
+                              "desc": "Deep and radiant ruby red in colour. The nose is spicy, with scents of cherry and mixed berry notes. Rich and silky, elegant and refined on the palate.",
+                              "tag": "Red Wine",
+                              "image": "images/ripasso-valpolicella-superiore.png"
+                        },
+                        {
+                              "name": "Nero D'Avola Sicilia",
+                              "price": "Bottle £28.00",
+                              "desc": "Deep ruby red in colour. Fruity, with notes ranging from plum to fruits of the forest. Good body, with smooth, mellow tannins.",
+                              "tag": "Red Wine",
+                              "image": "images/nero-davola-sicilia.png"
+                        },
+                        {
+                              "name": "Negroamaro Puglia",
+                              "price": "Bottle £20.00",
+                              "desc": "The aroma gives mature black berry fruits and spices. Full bodied and rounded on the finish with tannins.",
+                              "tag": "Red Wine",
+                              "image": "images/negroamaro-puglia.png"
+                        },
+                        {
+                              "name": "Primitivo Puglia",
+                              "price": "Bottle £28.00",
+                              "desc": "Deep ruby red, with purplish nuances. Light and elegant with characteristic cherry and plum notes.",
+                              "tag": "Red Wine",
+                              "image": "images/primitivo-puglia.png"
+                        }
+                  ],
+                  "Prosecco": [
+                        {
+                              "name": "Prosecco Rianna",
+                              "price": "Bottle £26.95",
+                              "desc": "Straw yellow with a fine, persistent perlage. Fine and floral with notes of wisteria and acacia blossom. Crisp and balanced, with a savoury finish.",
+                              "tag": "Prosecco",
+                              "image": "images/prosecco-rianna.png"
+                        },
+                        {
+                              "name": "Prosecco Rosé",
+                              "price": "Bottle £30.50",
+                              "desc": "Pale old rose, with a fine, persistent perlage. Fruity, with red fruit notes, and floral, with scents of rose and violet. Light and mellow, with a clever balance of acidity and smoothness.",
+                              "tag": "Prosecco",
+                              "image": "images/prosecco-rose.png"
+                        }
+                  ],
+                  "Cocktails": [
+                        {
+                              "name": "Bartender's Weekly Special",
+                              "price": "£9.50",
+                              "desc": "",
+                              "tag": "Cocktail",
+                              "image": "images/bartenders-weekly-special.png"
+                        },
+                        {
+                              "name": "Espresso Martini",
+                              "price": "£9.50",
+                              "desc": "A sumptuous and elegant mix of vodka, coffee liquor and espresso.",
+                              "tag": "Cocktail",
+                              "image": "images/espresso-martini.png"
+                        },
+                        {
+                              "name": "Mojito",
+                              "price": "£9.50",
+                              "desc": "A refreshing mix of Bacardi, fresh mint and lime.",
+                              "tag": "Cocktail",
+                              "image": "images/mojito.png"
+                        },
+                        {
+                              "name": "Pina Colada",
+                              "price": "£10.00",
+                              "desc": "A tropical blend of rich coconut cream, white rum and tangy pineapple.",
+                              "tag": "Cocktail",
+                              "image": "images/pina-colada.png"
+                        },
+                        {
+                              "name": "Aperol Spritz",
+                              "price": "£9.50",
+                              "desc": "A classic Italian aperitif, Aperol, prosecco and soda.",
+                              "tag": "Cocktail",
+                              "image": "images/aperol-spritz.png"
+                        },
+                        {
+                              "name": "Limoncello Spritz",
+                              "price": "£9.50",
+                              "desc": "Light and refreshing prosecco with limoncello.",
+                              "tag": "Cocktail",
+                              "image": "images/limoncello-spritz.png"
+                        },
+                        {
+                              "name": "Americano",
+                              "price": "£9.50",
+                              "desc": "Martini Rosso, Campari with soda water.",
+                              "tag": "Cocktail",
+                              "image": "images/americano-cocktail.png"
+                        },
+                        {
+                              "name": "Negroni",
+                              "price": "£9.50",
+                              "desc": "Martini Rosso, Campari and gin.",
+                              "tag": "Cocktail",
+                              "image": "images/negroni.png"
+                        },
+                        {
+                              "name": "The Godmother",
+                              "price": "£9.50",
+                              "desc": "Amaretto di Saronno and vodka.",
+                              "tag": "Cocktail",
+                              "image": "images/the-godmother.png"
+                        },
+                        {
+                              "name": "The Godfather",
+                              "price": "£9.50",
+                              "desc": "Amaretto di Saronno and whisky.",
+                              "tag": "Cocktail",
+                              "image": "images/the-godfather.png"
+                        },
+                        {
+                              "name": "Mimosa",
+                              "price": "£8.25",
+                              "desc": "Prosecco with fresh orange juice.",
+                              "tag": "Cocktail",
+                              "image": "images/mimosa.png"
+                        }
+                  ]
             }
-          ],
-          "Hot Drinks": [
-            {
-              name: "Turkish Coffee",
-              price: "£3.00",
-              desc: "",
-              tag: "Hot Drink",
-              image: ""
-            },
-            {
-              name: "Turkish Tea",
-              price: "£1.50",
-              desc: "",
-              tag: "Hot Drink",
-              image: ""
-            },
-            {
-              name: "Latte",
-              price: "£3.50",
-              desc: "",
-              tag: "Hot Drink",
-              image: ""
-            }
-          ],
-          "Cocktails": [
-            {
-              name: "Espresso Martini",
-              price: "£9.50",
-              desc: "A sumptuous and elegant mix of vodka, coffee liqueur and espresso.",
-              tag: "Cocktail",
-              image: ""
-            },
-            {
-              name: "Mojito",
-              price: "£9.50",
-              desc: "A refreshing mix of bacardi, fresh mint and lime.",
-              tag: "Cocktail",
-              image: ""
-            }
-          ]
-        }
       },
-
       "Breakfast": {
-        text: "Traditional Turkish Breakfast",
-        categories: {
-          "Traditional Favorites": [
-            {
-              name: "Turkish Breakfast on the Plate",
-              price: "£10.90",
-              desc: "Olives, cheese selections, honey, tomatoes, cucumber, sucuk, marmalade and butter.",
-              tag: "Breakfast",
-              image: ""
-            },
-            {
-              name: "English Breakfast on the Plate",
-              price: "£10.90",
-              desc: "Egg, baked spinach, cheese rolls, chicken sausages, tomatoes, beans, fried mushroom and marinated potatoes.",
-              tag: "Breakfast",
-              image: ""
-            },
-            {
-              name: "Turkish Menemen",
-              price: "£10.90",
-              desc: "Turkish scrambled eggs with tomatoes and peppers.",
-              tag: "Breakfast",
-              image: ""
+            "text": "Traditional Turkish Breakfast",
+            "categories": {
+                  "Traditional Favorites": [
+                        {
+                              "name": "Turkish Breakfast on the Plate",
+                              "price": "£10.90",
+                              "desc": "Olives, cheese selections, honey, tomatoes, cucumber, sucuk, marmalade and butter.",
+                              "tag": "Breakfast",
+                              "image": "images/turkish-breakfast-plate.png"
+                        },
+                        {
+                              "name": "English Breakfast on the Plate",
+                              "price": "£10.90",
+                              "desc": "Egg, baked spinach, cheese rolls, chicken sausages, tomatoes, beans, fried mushroom and marinated potatoes.",
+                              "tag": "Breakfast",
+                              "image": "images/english-breakfast-plate.png"
+                        },
+                        {
+                              "name": "Turkish Menemen",
+                              "price": "£10.90",
+                              "desc": "Turkish scrambled eggs with tomatoes and peppers.",
+                              "tag": "Breakfast",
+                              "image": "images/turkish-menemen.png"
+                        },
+                        {
+                              "name": "Porridge / Scone / Tea Cake / Fruit Bowl",
+                              "price": "£8.50",
+                              "desc": "Porridge (add fruit or Nutella), scone with jam and cream, tea cake with jam and butter, fruit bowl with chocolate sauce.",
+                              "tag": "Breakfast",
+                              "image": "images/porridge-scone-tea-cake-fruit-bowl.png"
+                        }
+                  ],
+                  "Breakfast Specials": [
+                        {
+                              "name": "Turkish Village Breakfast",
+                              "price": "£14.50",
+                              "desc": "A traditional Turkish breakfast spread featuring a variety of cheeses, olives, jams, honey, fresh tomatoes, cucumbers and eggs, served with Turkish tea pot.",
+                              "tag": "Breakfast",
+                              "image": "images/turkish-village-breakfast.png"
+                        },
+                        {
+                              "name": "Turkish Vegetarian Plate",
+                              "price": "£5.50",
+                              "desc": "Olives, cheese selections, honey, tomatoes, cucumber, marmalade and butter.",
+                              "tag": "Breakfast",
+                              "image": "images/turkish-vegetarian-plate.png"
+                        }
+                  ],
+                  "Cold Drinks": [
+                        {
+                              "name": "Orange Juice",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Cold Drink",
+                              "image": "images/orange-juice.png"
+                        },
+                        {
+                              "name": "Apple Juice",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Cold Drink",
+                              "image": "images/apple-juice.png"
+                        },
+                        {
+                              "name": "Cranberry Juice",
+                              "price": "£2.50",
+                              "desc": "",
+                              "tag": "Cold Drink",
+                              "image": "images/cranberry-juice.png"
+                        }
+                  ],
+                  "Hot Drinks": [
+                        {
+                              "name": "Turkish Tea",
+                              "price": "£3.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/turkish-tea.png"
+                        },
+                        {
+                              "name": "English Breakfast Tea",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/english-breakfast-tea.png"
+                        },
+                        {
+                              "name": "Tea in the Pot",
+                              "price": "£4.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/tea-in-the-pot.png"
+                        },
+                        {
+                              "name": "Turkish Coffee",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/turkish-coffee.png"
+                        },
+                        {
+                              "name": "Americano",
+                              "price": "£3.50",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/americano-white.png"
+                        },
+                        {
+                              "name": "Flat White",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/flat-white.png"
+                        },
+                        {
+                              "name": "Latte",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/latte.png"
+                        },
+                        {
+                              "name": "Cappuccino",
+                              "price": "£4.00",
+                              "desc": "",
+                              "tag": "Hot Drink",
+                              "image": "images/cappuccino.png"
+                        }
+                  ]
             }
-          ],
-          "Breakfast Drinks": [
-            {
-              name: "Turkish Tea",
-              price: "£3",
-              desc: "",
-              tag: "Hot Drink",
-              image: ""
-            },
-            {
-              name: "Turkish Coffee",
-              price: "£4",
-              desc: "",
-              tag: "Hot Drink",
-              image: ""
-            },
-            {
-              name: "Orange Juice",
-              price: "£3.5",
-              desc: "",
-              tag: "Cold Drink",
-              image: ""
-            }
-          ]
-        }
       }
-    };
+};
 
     let currentMain = "Main Menu";
-    let currentCategory = "Starters";
+    let currentCategory = "Chef's Choice Soup";
     let searchTerm = "";
 
     const mainTabs = document.getElementById("mainTabs");
@@ -670,7 +1702,7 @@
 
         div.innerHTML = `
           <div class="item-img">
-            ${item.image ? `<img src="${item.image}" alt="${item.name}">` : ""}
+            ${item.image ? `<img src="${item.image}" alt="${item.name}" loading="lazy" onerror="this.style.display=\'none\'">` : ""}
           </div>
           <div class="item-main">
             <div class="item-top">
@@ -706,7 +1738,7 @@
       document.getElementById("modalDesc").textContent = item.desc || "No description available.";
 
       const modalImage = document.getElementById("modalImage");
-      modalImage.innerHTML = item.image ? `<img src="${item.image}" alt="${item.name}">` : "";
+      modalImage.innerHTML = item.image ? `<img src="${item.image}" alt="${item.name}" onerror="this.style.display=\'none\'">` : "";
 
       document.getElementById("modal").classList.add("open");
     }
