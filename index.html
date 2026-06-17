@@ -229,11 +229,40 @@
     }
 
     footer {
-      text-align: center;
-      padding: 24px 16px 34px;
+      padding: 24px 16px 28px;
       color: var(--muted);
       font-size: 12px;
       border-top: 1px solid var(--line);
+    }
+
+    .footer-note {
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .footer-credit {
+      margin-top: 10px;
+      text-align: left;
+      font-family: "Brush Script MT", "Segoe Script", "Lucida Handwriting", cursive;
+      font-size: 15px;
+      font-style: italic;
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: 0.35px;
+      color: rgba(91, 59, 30, 0.82);
+      transform: rotate(-1.5deg);
+      transform-origin: left center;
+    }
+
+    @media (max-width: 520px) {
+      footer {
+        padding: 22px 14px 24px;
+      }
+
+      .footer-credit {
+        margin-top: 9px;
+        font-size: 10px;
+      }
     }
 
     .modal {
@@ -338,7 +367,12 @@
     <main class="menu-list" id="menuList"></main>
 
     <footer>
-      EFES Restaurant • Prices may change without prior notice.
+      <div class="footer-note">
+        EFES Restaurant • Prices may change without prior notice.
+      </div>
+      <div class="footer-credit">
+        Designed by Ahmet Ersoy
+      </div>
     </footer>
   </div>
 
